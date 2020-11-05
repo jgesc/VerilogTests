@@ -1,0 +1,22 @@
+// Code for a parametrized D-Latch
+
+module DLatch
+#(
+  parameter int WIDTH = 8
+)
+(
+  input   logic             clk,
+  input   logic             rst,
+  input   logic[WIDTH-1:0]  d,
+  output  logic[WIDTH-1:0]  q
+);
+
+  logic[WIDTH-1:0] state;
+
+  always_latch begin
+    if (rst)
+      state = 0;
+    state <= clk ? d : state;
+    q <= clk ? q : state;
+  end
+endmodule
