@@ -14,8 +14,10 @@ module DLatch
   logic[WIDTH-1:0] state;
 
   always_latch begin
-    if (rst)
+    if (rst) begin
       state = 0;
+      q = 0;
+    end
     state <= clk ? d : state;
     q <= clk ? q : state;
   end
