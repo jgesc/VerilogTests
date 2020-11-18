@@ -18,44 +18,83 @@ module DLatch_Test;
     // 8 bits
     $display("8-bits");
     $monitor($time," D=%x, CLK=%x, Q=%x, RST=%x", d8, clk, q8, rst);
-    clk = 0; d8=8'h00; rst = 1;
+
+    clk = 0; d8=16'h00; rst = 1;
     #5
-    clk = 0; d8=8'hFF; rst = 0;
+    assert (q8 == 16'h00);
+
+    clk = 0; d8=16'hFF; rst = 0;
     #5
-    clk = 1; d8=8'hAA;
+    assert (q8 == 16'h00);
+
+    clk = 1; d8=16'hAA;
     #5
-    clk = 1; d8=8'h6D;
+    assert (q8 == 16'h00);
+
+    clk = 1; d8=16'h6D;
     #5
-    clk = 0; d8=8'h25;
+    assert (q8 == 16'h00);
+
+    clk = 0; d8=16'h25;
     #5
-    clk = 0; d8=8'h52;
+    assert (q8 == 16'h6D);
+
+    clk = 0; d8=16'h52;
     #5
-    clk = 1; d8=8'hBA;
+    assert (q8 == 16'h6D);
+
+    clk = 1; d8=16'hBA;
     #5
-    clk = 1; d8=8'hC5;
+    assert (q8 == 16'h6D);
+
+    clk = 1; d8=16'hC5;
     #5
-    clk = 0; d8=8'h80;
+    assert (q8 == 16'h6D);
+
+    clk = 0; d8=16'h80;
     #5
-    clk = 0; d8=8'h99;
+    assert (q8 == 16'hC5);
+
+    clk = 0; d8=16'h99;
     #5
+    assert (q8 == 16'hC5);
+
     rst = 1;
     #5
+    assert (q8 == 16'h00);
+
     rst = 0;
     #5
-    clk = 0; d8=8'h25;
+    assert (q8 == 16'h00);
+
+    clk = 0; d8=16'h25;
     #5
-    clk = 0; d8=8'h52;
+    assert (q8 == 16'h00);
+
+    clk = 0; d8=16'h52;
     #5
-    clk = 1; d8=8'hBA; rst = 1;
+    assert (q8 == 16'h00);
+
+    clk = 1; d8=16'hBA; rst = 1;
     #5
-    clk = 1; d8=8'hC5; rst = 0;
+    assert (q8 == 16'h00);
+
+    clk = 1; d8=16'hC5; rst = 0;
     #5
-    clk = 0; d8=8'h80;
+    assert (q8 == 16'h00);
+
+    clk = 0; d8=16'h80;
     #5
-    clk = 0; d8=8'h99;
+    assert (q8 == 16'hC5);
+
+    clk = 0; d8=16'h99;
     #5
+    assert (q8 == 16'hC5);
+
     rst = 1;
     #5
+    assert (q8 == 16'h00);
+
     rst = 0;
 
     // 16 bits
@@ -63,43 +102,83 @@ module DLatch_Test;
     $monitor($time," D=%x, CLK=%x, Q=%x, RST=%x", d16, clk, q16, rst);
     clk = 0; d16=16'h0000; rst = 1;
     #5
+    assert (q16 == 16'h0000);
+
     clk = 0; d16=16'hFFFF; rst = 0;
     #5
+    assert (q16 == 16'h0000);
+
     clk = 1; d16=16'hAABB;
     #5
+    assert (q16 == 16'h0000);
+
     clk = 1; d16=16'h6D98;
     #5
+    assert (q16 == 16'h0000);
+
     clk = 0; d16=16'h25EA;
     #5
+    assert (q16 == 16'h6D98);
+
     clk = 0; d16=16'h5252;
     #5
+    assert (q16 == 16'h6D98);
+
     clk = 1; d16=16'hBA0D;
     #5
+    assert (q16 == 16'h6D98);
+
     clk = 1; d16=16'hC5A0;
     #5
+    assert (q16 == 16'h6D98);
+
     clk = 0; d16=16'h160B;
     #5
+    assert (q16 == 16'hC5A0);
+
     clk = 0; d16=16'h99C8;
     #5
+    assert (q16 == 16'hC5A0);
+
     rst = 1;
     #5
+    assert (q16 == 16'h0000);
+
     rst = 0;
     #5
+    assert (q16 == 16'h0000);
+
     clk = 0; d16=16'h2573;
     #5
+    assert (q16 == 16'h0000);
+
     clk = 0; d16=16'h524A;
     #5
+    assert (q16 == 16'h0000);
+
     clk = 1; d16=16'hBA5E; rst = 1;
     #5
+    assert (q16 == 16'h0000);
+
     clk = 1; d16=16'hC544; rst = 0;
     #5
+    assert (q16 == 16'h0000);
+
     clk = 0; d16=16'h160A;
     #5
+    assert (q16 == 16'hC544);
+
     clk = 0; d16=16'h9988;
     #5
+    assert (q16 == 16'hC544);
+
     rst = 1;
     #5
+    assert (q16 == 16'h0000);
+
     rst = 0;
+    #5
+    assert (q16 == 16'h0000);
   end
 
 endmodule

@@ -17,13 +17,23 @@ module Mult2To1_Test;
     $monitor($time," IN_A=%x, IN_B=%x, OUT=%x, CTRL=%x", in_a, in_b, out, ctrl);
     ctrl = 0; in_a=8'hAA; in_b=8'hBB;
     #5
+    assert (out == 8'hAA);
+
     ctrl = 1; in_a=8'hAA; in_b=8'hBB;
     #5
+    assert (out == 8'hBB);
+
     ctrl = 1; in_a=8'h95; in_b=8'hBB;
     #5
+    assert (out == 8'hBB);
+
     ctrl = 1; in_a=8'h23; in_b=8'hAF;
     #5
+    assert (out == 8'hAF);
+    
     ctrl = 0; in_a=8'h80; in_b=8'h0E;
+    #5
+    assert (out == 8'h80);
   end
 
 endmodule
